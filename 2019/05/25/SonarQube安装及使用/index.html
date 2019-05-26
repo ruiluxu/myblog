@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="SonarQube是什么SonarQube是一种自动代码审查工具，用于检测代码中的错误，漏洞和代码异味。 它可以与您现有的工作流程集成，以便在项目分支和拉取请求之间进行连续的代码检查。 特征： 建议将SonarQube扫描仪用作使用SonarQube分析项目的默认启动器。 SonarQube安装及配置下载及安装准备工作： SonarQube（最新版本7.4）：https://www.sonarqu">
+<meta name="keywords" content="Jenkins,SonarQube">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SonarQube安装及使用">
+<meta property="og:url" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/index.html">
+<meta property="og:site_name" content="Breeze">
+<meta property="og:description" content="SonarQube是什么SonarQube是一种自动代码审查工具，用于检测代码中的错误，漏洞和代码异味。 它可以与您现有的工作流程集成，以便在项目分支和拉取请求之间进行连续的代码检查。 特征： 建议将SonarQube扫描仪用作使用SonarQube分析项目的默认启动器。 SonarQube安装及配置下载及安装准备工作： SonarQube（最新版本7.4）：https://www.sonarqu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps77.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps78.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps79.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps80.png">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps81.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps82.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps83.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps84.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps98.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps86.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps87.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps88.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps89.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps90.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps91.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps92.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps93.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps94.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps95.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps96.jpg">
+<meta property="og:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps97.png">
+<meta property="og:updated_time" content="2019-05-25T08:25:56.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SonarQube安装及使用">
+<meta name="twitter:description" content="SonarQube是什么SonarQube是一种自动代码审查工具，用于检测代码中的错误，漏洞和代码异味。 它可以与您现有的工作流程集成，以便在项目分支和拉取请求之间进行连续的代码检查。 特征： 建议将SonarQube扫描仪用作使用SonarQube分析项目的默认启动器。 SonarQube安装及配置下载及安装准备工作： SonarQube（最新版本7.4）：https://www.sonarqu">
+<meta name="twitter:image" content="http://xuruilu.com/2019/05/25/SonarQube安装及使用/wps77.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://xuruilu.com/2019/05/25/SonarQube安装及使用/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SonarQube安装及使用 | Breeze</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Breeze</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Quick notes</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xuruilu.com/2019/05/25/SonarQube安装及使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="徐旭豪">
+      <meta itemprop="description" content="戒骄戒躁">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Breeze">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SonarQube安装及使用
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-25 15:26:06 / 修改时间：16:25:56" itemprop="dateCreated datePublished" datetime="2019-05-25T15:26:06+08:00">2019-05-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Jenkins-SonarQube-GitLab持续集成/" itemprop="url" rel="index"><span itemprop="name">Jenkins+SonarQube+GitLab持续集成</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/05/25/SonarQube安装及使用/" class="leancloud_visitors" data-flag-title="SonarQube安装及使用">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="SonarQube是什么"><a href="#SonarQube是什么" class="headerlink" title="SonarQube是什么"></a>SonarQube是什么</h2><p>SonarQube是一种自动代码审查工具，用于检测代码中的错误，漏洞和代码异味。 它可以与您现有的工作流程集成，以便在项目分支和拉取请求之间进行连续的代码检查。</p>
+<p>特征：</p>
+<p>建议将SonarQube扫描仪用作使用SonarQube分析项目的默认启动器。</p>
+<h2 id="SonarQube安装及配置"><a href="#SonarQube安装及配置" class="headerlink" title="SonarQube安装及配置"></a>SonarQube安装及配置</h2><h3 id="下载及安装"><a href="#下载及安装" class="headerlink" title="下载及安装"></a>下载及安装</h3><p>准备工作：</p>
+<p>SonarQube（最新版本7.4）：<a href="https://www.sonarqube.org/downloads/" target="_blank" rel="noopener">https://www.sonarqube.org/downloads/</a></p>
+<p>安装：</p>
+<p>先查看版本对应的环境要求：<a href="https://docs.sonarqube.org/latest/requirements/requirements/" target="_blank" rel="noopener">https://docs.sonarqube.org/latest/requirements/requirements/</a></p>
+<p>下载好sonarqube后解压，目录结构为下图所示：</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps77.jpg">
+<h3 id="修改sonar配置文件"><a href="#修改sonar配置文件" class="headerlink" title="修改sonar配置文件"></a>修改sonar配置文件</h3><p>在config/sonar.properties文件中，修改端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#修改端口，默认端口为9000</span><br><span class="line">#sonar.web.port=9000</span><br></pre></td></tr></table></figure>
+<h3 id="配置数据存储"><a href="#配置数据存储" class="headerlink" title="配置数据存储"></a>配置数据存储</h3><p>目前支持：</p>
+<p>H2（默认内嵌数据库，只能用于测试场景）</p>
+<p>Microsoft SQL Server</p>
+<p>Oracle（本人采用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Oracle JDBC驱动程序版本12.1.0.1和12.1.0.2存在重大缺陷，不建议与SonarQube一起使用（请参阅更多详细信息）。</span><br><span class="line">下载oracle的jdbc驱动包：</span><br><span class="line">https://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html</span><br><span class="line">将jar包放在sonarqube-7.4\extensions\jdbc-driver\oracle</span><br><span class="line"></span><br><span class="line">执行以下语句，新建sonarqube表空间和用户，并授予相应的权限</span><br><span class="line">CREATE TABLESPACE sonarqube</span><br><span class="line">  DATAFILE &apos;d://app/sonarqube.dbf&apos; SIZE 512M</span><br><span class="line">  AUTOEXTEND ON NEXT 512M MAXSIZE 20480M;</span><br><span class="line">CREATE USER sonarqube IDENTIFIED BY sonarqube;</span><br><span class="line">GRANT CONNECT, RESOURCE ,DBA TO sonarqube;</span><br><span class="line"></span><br><span class="line">然修改sonar.properties</span><br><span class="line">sonar.jdbc.username=sonarqube </span><br><span class="line">sonar.jdbc.password=sonarqube </span><br><span class="line">sonar.jdbc.url=jdbc:oracle:thin:@192.168.5.13:1521/orcl</span><br></pre></td></tr></table></figure>
+<p>PostgreSQL</p>
+<p>MySQL （不推荐）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">可以在MySQL中使用两种众所周知的引擎：MyISAM和InnoDB。 MyISAM是两个引擎中最古老的，并且正逐渐被InnoDB取代。 随着质量控制项目数量的增加，InnoDB显然更快，并且使用SonarQube可以更好地扩展。 如果您是SonarQube的早期采用者，您可能有一系列仍在使用MyISAM的表。 要提高性能，您应该将所有表的引擎更改为InnoDB。</span><br><span class="line">一旦所有SonarQube表都使用InnoDB引擎，首先要做的是使用innodb_buffer_pool_size参数为MySQL实例分配最大量的RAM，并为query_cache_size参数提供至少15Mb。</span><br></pre></td></tr></table></figure>
+<p>配置好数据库后启动报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">2018.12.18 18:35:03 INFO  app[][o.s.a.p.ProcessLauncherImpl] Launch process[[key=&apos;web&apos;, ipcIndex=2, logFilenamePrefix=web]] from [D:\soft\sonarqube\sonarqube-7.4]: D:\Program Files (x86)\Java\jre1.8.0_144\bin\java -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Djava.io.tmpdir=D:\soft\sonarqube\sonarqube-7.4\temp -Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -cp ./lib/common/*;D:\soft\sonarqube\sonarqube-7.4\extensions\jdbc-driver\oracle\ojdbc6.jar org.sonar.server.app.WebServer D:\soft\sonarqube\sonarqube-7.4\temp\sq-process2345787089702296293properties</span><br><span class="line">2018.12.18 18:35:10 INFO  app[][o.s.a.SchedulerImpl] Process [web] is stopped</span><br><span class="line">2018.12.18 18:35:10 WARN  app[][o.e.t.n.Netty4Transport] exception caught on transport layer [[id: 0x7400b5b1, L:/127.0.0.1:50250 - R:/127.0.0.1:9001]], closing connection</span><br><span class="line">java.io.IOException: 远程主机强迫关闭了一个现有的连接。</span><br><span class="line">	at sun.nio.ch.SocketDispatcher.read0(Native Method)</span><br><span class="line">	at sun.nio.ch.SocketDispatcher.read(Unknown Source)</span><br><span class="line">	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source)</span><br><span class="line">	at sun.nio.ch.IOUtil.read(Unknown Source)</span><br><span class="line">	at sun.nio.ch.SocketChannelImpl.read(Unknown Source)</span><br><span class="line">	at io.netty.buffer.UnpooledUnsafeDirectByteBuf.setBytes(UnpooledUnsafeDirectByteBuf.java:433)</span><br><span class="line">	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1100)</span><br><span class="line">	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:372)</span><br><span class="line">	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:123)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:644)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:579)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:496)</span><br><span class="line">	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:458)</span><br><span class="line">	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:858)</span><br><span class="line">	at java.lang.Thread.run(Unknown Source)</span><br><span class="line">2018.12.18 18:35:10 INFO  app[][o.s.a.SchedulerImpl] Process [es] is stopped</span><br><span class="line">2018.12.18 18:35:10 INFO  app[][o.s.a.SchedulerImpl] SonarQube is stopped</span><br><span class="line">&lt;-- Wrapper Stopped</span><br></pre></td></tr></table></figure>
+<p>原因是数据库配置信息不对或者jdbc驱动包版本不对。</p>
+<h3 id="Sonar启动"><a href="#Sonar启动" class="headerlink" title="Sonar启动"></a>Sonar启动</h3><p>在bin目下找到系统对应的版本，启动StartSonar.bat</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps78.jpg">
+<img src="/2019/05/25/SonarQube安装及使用/wps79.jpg">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StartSonar.bat 启动sonarqube</span><br><span class="line">InstallNTService.bat 安装sonarqube服务</span><br><span class="line">StartNTService.bat  启动sonarqube服务</span><br><span class="line">StopNTService.bat  停止sonarqube服务</span><br><span class="line">UninstallNTService.bat 卸载sonarqube服务</span><br></pre></td></tr></table></figure>
+<p>启动报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">2019.02.14 15:35:40 INFO  app[][o.s.a.SchedulerImpl] Process [es] is stopped</span><br><span class="line">2019.02.14 15:35:40 INFO  app[][o.s.a.SchedulerImpl] SonarQube is stopped</span><br><span class="line">FATAL StatusLogger Interrupted before Log4j Providers could be loaded.</span><br><span class="line"> java.lang.InterruptedException</span><br><span class="line">	at java.util.concurrent.locks.AbstractQueuedSynchronizer.acquireInterruptibly(Unknown Source)</span><br><span class="line">	at java.util.concurrent.locks.ReentrantLock.lockInterruptibly(Unknown Source)</span><br><span class="line">	at org.apache.logging.log4j.util.ProviderUtil.lazyInit(ProviderUtil.java:121)</span><br><span class="line">	at org.apache.logging.log4j.util.ProviderUtil.hasProviders(ProviderUtil.java:108)</span><br><span class="line">	at org.apache.logging.log4j.LogManager.&lt;clinit&gt;(LogManager.java:89)</span><br><span class="line">	at org.elasticsearch.common.logging.ESLoggerFactory.getLogger(ESLoggerFactory.java:54)</span><br><span class="line">	at org.elasticsearch.common.logging.Loggers.getLogger(Loggers.java:105)</span><br><span class="line">	at org.elasticsearch.common.logging.Loggers.getLogger(Loggers.java:72)</span><br><span class="line">	at org.elasticsearch.common.component.AbstractComponent.&lt;init&gt;(AbstractComponent.java:37)</span><br><span class="line">	at org.elasticsearch.plugins.PluginsService.&lt;init&gt;(PluginsService.java:97)</span><br><span class="line">	at org.elasticsearch.client.transport.TransportClient.newPluginService(TransportClient.java:101)</span><br><span class="line">	at org.elasticsearch.client.transport.TransportClient.buildTemplate(TransportClient.java:126)</span><br><span class="line">	at org.elasticsearch.client.transport.TransportClient.&lt;init&gt;(TransportClient.java:254)</span><br><span class="line">	at org.sonar.application.es.EsConnectorImpl$MinimalTransportClient.&lt;init&gt;(EsConnectorImpl.java:104)</span><br><span class="line">	at org.sonar.application.es.EsConnectorImpl.buildTransportClient(EsConnectorImpl.java:90)</span><br><span class="line">	at org.sonar.application.es.EsConnectorImpl.getTransportClient(EsConnectorImpl.java:75)</span><br><span class="line">	at org.sonar.application.es.EsConnectorImpl.getClusterHealthStatus(EsConnectorImpl.java:62)</span><br><span class="line">	at org.sonar.application.process.EsProcessMonitor.checkStatus(EsProcessMonitor.java:90)</span><br><span class="line">	at org.sonar.application.process.EsProcessMonitor.checkOperational(EsProcessMonitor.java:75)</span><br><span class="line">	at org.sonar.application.process.EsProcessMonitor.isOperational(EsProcessMonitor.java:60)</span><br><span class="line">	at org.sonar.application.process.SQProcess.refreshState(SQProcess.java:161)</span><br><span class="line">	at org.sonar.application.process.SQProcess$EventWatcher.run(SQProcess.java:220)</span><br><span class="line">ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...</span><br></pre></td></tr></table></figure>
+<p> 解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JDK重新安装一下，可能是安装JDK时环境变量未设置好。</span><br></pre></td></tr></table></figure>
+<h3 id="访问SonarQube"><a href="#访问SonarQube" class="headerlink" title="访问SonarQube"></a>访问SonarQube</h3><p>使用系统管理员凭据（admin / admin）登录http：// localhost：9000。</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps80.png">
+<img src="/2019/05/25/SonarQube安装及使用/wps81.jpg">
+<h3 id="汉化sonarQube"><a href="#汉化sonarQube" class="headerlink" title="汉化sonarQube"></a>汉化sonarQube</h3><p>插件页面：<a href="https://docs.sonarqube.org/display/PLUG/Plugin+Library" target="_blank" rel="noopener">https://docs.sonarqube.org/display/PLUG/Plugin+Library</a></p>
+<p>搜索chinese</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps82.jpg">
+<p>点击Chinese，跳转到github：<a href="https://github.com/SonarQubeCommunity/sonar-l10n-zh" target="_blank" rel="noopener">https://github.com/SonarQubeCommunity/sonar-l10n-zh</a></p>
+<p>git克隆下来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/SonarQubeCommunity/sonar-l10n-zh</span><br></pre></td></tr></table></figure>
+<p>进行maven打包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package -DskipTests</span><br></pre></td></tr></table></figure>
+<p>将sonar-l10n-zh-plugin-1.25-SNAPSHOT.jar放到sonarqube-7.4\extensions\plugins下，然后重启sonar服务即可.</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps83.jpg">
+<p>sonar默认集成了Java Ecosystem插件，该插件是一组插件的合集</p>
+<p>（1）Java [sonar-java-plugin]：java源代码解析，计算指标等</p>
+<p>（2）Squid [sonar-squid-java-plugin]：检查违反Sonar定义规则的代码</p>
+<p>（3）Checkstyle [sonar-checkstyle-plugin]：使用CheckStyle检查违反统一代码编写风格的代码</p>
+<p>（4）FindBugs [sonar-findbugs-plugin]：使用FindBugs检查违反规则的缺陷代码</p>
+<p>（5）PMD [sonar-pmd-plugin]：使用pmd检查违反规则的代码</p>
+<p>（6）Surefire [sonar-surefire-plugin]：使用Surefire执行单元测试</p>
+<p>（7）Cobertura [sonar-cobertura-plugin]：使用Cobertura获取代码覆盖率</p>
+<p>（8）JaCoCo [sonar-jacoco-plugin]：使用JaCOCO获取代码覆盖率</p>
+<p>上面只是安装sonarqube并不能进行代码分析，而是需要Sonarqube-Scanner扫描器进行分析，接下来讲解sonarqube-scanner。</p>
+<h2 id="SonarQube-Scanner安装及配置"><a href="#SonarQube-Scanner安装及配置" class="headerlink" title="SonarQube-Scanner安装及配置"></a>SonarQube-Scanner安装及配置</h2><h3 id="下载及安装-1"><a href="#下载及安装-1" class="headerlink" title="下载及安装"></a>下载及安装</h3><p>sonarqube-scanner（最新版本sonar-scanner-cli-3.2.0.1227）：</p>
+<p><a href="https://binaries.sonarsource.com/Distribution/sonar-scanner-cli" target="_blank" rel="noopener">https://binaries.sonarsource.com/Distribution/sonar-scanner-cli</a></p>
+<p>解压sonar-scanner-3.2.0.1227-windows文件目录如下：</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps84.jpg">
+<h3 id="修改sonar-scanner配置文件"><a href="#修改sonar-scanner配置文件" class="headerlink" title="修改sonar-scanner配置文件"></a>修改sonar-scanner配置文件</h3><p>在sonar-scanner-3.2.0.1227-windows\conf下的sonar-scanner.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#Configure here general information about the environment, such as SonarQube server connection details for example</span><br><span class="line">#No information about specific project should appear here</span><br><span class="line"></span><br><span class="line">#----- Default SonarQube server</span><br><span class="line">#sonar.host.url=http://localhost:9000</span><br><span class="line"></span><br><span class="line">#----- Default source code encoding</span><br><span class="line">sonar.sourceEncoding=UTF-8</span><br><span class="line">sonar.projectKey=demo </span><br><span class="line">sonar.projectName=demo</span><br><span class="line">sonar.projectVersion=1.0-SNAPSHOT </span><br><span class="line">sonar.sources=src/main/java</span><br><span class="line">sonar.tests=src/test/java</span><br><span class="line">sonar.binaries=target/classes</span><br><span class="line">sonar.language=java</span><br></pre></td></tr></table></figure>
+<h3 id="运行sonar-scanner"><a href="#运行sonar-scanner" class="headerlink" title="运行sonar-scanner"></a>运行sonar-scanner</h3><p>首先配置配置系统环境变量path加上或者配置SCANNER_HOME</p>
+<p>D:\soft\sonarqube\sonar-scanner-3.2.0.1227-windows\bin</p>
+<p>打开C:\Users\Administrator.jenkins\workspace下有demo项目</p>
+<p>运行sonar-scanner.bat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\.jenkins\workspace\demo&gt;sonar-scanner</span><br><span class="line">INFO: Scanner configuration file: D:\soft\sonarqube\sonar-scanner-3.2.0.1227-win</span><br><span class="line">dows\bin\..\conf\sonar-scanner.properties</span><br><span class="line">INFO: Project root configuration file: NONE</span><br><span class="line">INFO: SonarQube Scanner 3.2.0.1227</span><br><span class="line">INFO: Java 1.8.0_121 Oracle Corporation (64-bit)</span><br><span class="line">INFO: Windows Server 2012 6.2 amd64</span><br><span class="line">INFO: User cache: C:\Users\Administrator\.sonar\cache</span><br><span class="line">INFO: SonarQube server 7.4.0</span><br><span class="line">INFO: Default locale: &quot;zh_CN&quot;, source code encoding: &quot;UTF-8&quot;</span><br><span class="line">INFO: Publish mode</span><br><span class="line">INFO: Load global settings</span><br><span class="line">INFO: Load global settings (done) | time=202ms</span><br><span class="line">INFO: Server id: BF41A1F2-AWfAVJSohnYzvvXjRljU</span><br><span class="line">INFO: User cache: C:\Users\Administrator\.sonar\cache</span><br><span class="line">INFO: Load/download plugins</span><br><span class="line">INFO: Load plugins index</span><br><span class="line">INFO: Load plugins index (done) | time=94ms</span><br><span class="line">INFO: Plugin [l10nzh] defines &apos;l10nen&apos; as base plugin. This metadata can be remo</span><br><span class="line">ved from manifest of l10n plugins since version 5.2.</span><br><span class="line">INFO: Load/download plugins (done) | time=172ms</span><br><span class="line">INFO: Loaded core extensions:</span><br><span class="line">INFO: Process project properties</span><br><span class="line">INFO: Load project repositories</span><br><span class="line">INFO: Load project repositories (done) | time=171ms</span><br><span class="line">INFO: Load quality profiles</span><br><span class="line">INFO: Load quality profiles (done) | time=156ms</span><br><span class="line">INFO: Load active rules</span><br><span class="line">INFO: Load active rules (done) | time=3432ms</span><br><span class="line">INFO: Load metrics repository</span><br><span class="line">INFO: Load metrics repository (done) | time=78ms</span><br><span class="line">INFO: Project key: demo</span><br><span class="line">INFO: Project base dir: C:\Users\Administrator\.jenkins\workspace\demo</span><br><span class="line">INFO: -------------  Scan demo</span><br><span class="line">INFO: Base dir: C:\Users\Administrator\.jenkins\workspace\demo</span><br><span class="line">INFO: Working dir: C:\Users\Administrator\.jenkins\workspace\demo\.scannerwork</span><br><span class="line">INFO: Source paths: src/main/java</span><br><span class="line">INFO: Test paths: src/test/java</span><br><span class="line">INFO: Source encoding: UTF-8, default locale: zh_CN</span><br><span class="line">INFO: Load server rules</span><br><span class="line">INFO: Load server rules (done) | time=780ms</span><br><span class="line">INFO: Language is forced to java</span><br><span class="line">INFO: Index files</span><br><span class="line">INFO: 2 files indexed</span><br><span class="line">INFO: Quality profile for java: Sonar way</span><br><span class="line">INFO: Sensor JavaSquidSensor [java]</span><br><span class="line">INFO: Configured Java source version (sonar.java.source): none</span><br><span class="line">INFO: JavaClasspath initialization</span><br><span class="line">WARN: Bytecode of dependencies was not provided for analysis of source files, yo</span><br><span class="line">u might end up with less precise results. Bytecode can be provided using sonar.j</span><br><span class="line">ava.libraries property</span><br><span class="line">INFO: JavaClasspath initialization (done) | time=15ms</span><br><span class="line">INFO: JavaTestClasspath initialization</span><br><span class="line">WARN: Bytecode of dependencies was not provided for analysis of test files, you</span><br><span class="line">might end up with less precise results. Bytecode can be provided using sonar.jav</span><br><span class="line">a.test.libraries property</span><br><span class="line">INFO: JavaTestClasspath initialization (done) | time=0ms</span><br><span class="line">INFO: Java Main Files AST scan</span><br><span class="line">INFO: 1 source files to be analyzed</span><br><span class="line">INFO: 1/1 source files have been analyzed</span><br><span class="line">INFO: Java Main Files AST scan (done) | time=1030ms</span><br><span class="line">INFO: Java Test Files AST scan</span><br><span class="line">INFO: 1 source files to be analyzed</span><br><span class="line">INFO: Java Test Files AST scan (done) | time=327ms</span><br><span class="line">INFO: Sensor JavaSquidSensor [java] (done) | time=3853ms</span><br><span class="line">INFO: Sensor JaCoCo XML Report Importer [jacoco]</span><br><span class="line">INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=0ms</span><br><span class="line">INFO: 1/1 source files have been analyzed</span><br><span class="line">INFO: Sensor SurefireSensor [java]</span><br><span class="line">INFO: parsing [C:\Users\Administrator\.jenkins\workspace\demo\target\surefire-re</span><br><span class="line">ports]</span><br><span class="line">INFO: Sensor SurefireSensor [java] (done) | time=125ms</span><br><span class="line">INFO: Sensor JaCoCoSensor [java]</span><br><span class="line">INFO: Sensor JaCoCoSensor [java] (done) | time=0ms</span><br><span class="line">INFO: Sensor SonarJavaXmlFileSensor [java]</span><br><span class="line">INFO: Sensor SonarJavaXmlFileSensor [java] (done) | time=0ms</span><br><span class="line">INFO: Sensor Zero Coverage Sensor</span><br><span class="line">INFO: Sensor Zero Coverage Sensor (done) | time=16ms</span><br><span class="line">INFO: Sensor Java CPD Block Indexer</span><br><span class="line">INFO: Sensor Java CPD Block Indexer (done) | time=31ms</span><br><span class="line">INFO: 1 file had no CPD blocks</span><br><span class="line">INFO: Calculating CPD for 0 files</span><br><span class="line">INFO: CPD calculation finished</span><br><span class="line">INFO: Analysis report generated in 530ms, dir size=33 KB</span><br><span class="line">INFO: Analysis reports compressed in 15ms, zip size=10 KB</span><br><span class="line">INFO: Analysis report uploaded in 63ms</span><br><span class="line">INFO: ANALYSIS SUCCESSFUL, you can browse http://localhost:9000/dashboard?id=dem</span><br><span class="line">o</span><br><span class="line">INFO: Note that you will be able to access the updated dashboard once the server</span><br><span class="line"> has processed the submitted analysis report</span><br><span class="line">INFO: More about the report processing at http://localhost:9000/api/ce/task?id=A</span><br><span class="line">WfK-2cjZyoDqE5acg2c</span><br><span class="line">INFO: Task total time: 30.720 s</span><br><span class="line">INFO: ------------------------------------------------------------------------</span><br><span class="line">INFO: EXECUTION SUCCESS</span><br><span class="line">INFO: ------------------------------------------------------------------------</span><br><span class="line">INFO: Total time: 34.495s</span><br><span class="line">INFO: Final Memory: 17M/125M</span><br><span class="line">INFO: ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<p> 分析成功后，接下来就可以在sonarqube查看结果信息。</p>
+<h3 id="查看sonarqube指标信息"><a href="#查看sonarqube指标信息" class="headerlink" title="查看sonarqube指标信息"></a>查看sonarqube指标信息</h3><p>然后在sonarqube查看相应的质量指标信息，比如Bugs、漏洞、异味、覆盖率、重复率等等。</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps98.jpg">
+<h2 id="Sonar与Jenkins进行集成"><a href="#Sonar与Jenkins进行集成" class="headerlink" title="Sonar与Jenkins进行集成"></a>Sonar与Jenkins进行集成</h2><h3 id="下载sonar插件并安装"><a href="#下载sonar插件并安装" class="headerlink" title="下载sonar插件并安装"></a>下载sonar插件并安装</h3><p>插件列表<a href="http://updates.jenkins-ci.org/download/plugins/" target="_blank" rel="noopener">http://updates.jenkins-ci.org/download/plugins/</a></p>
+<img src="/2019/05/25/SonarQube安装及使用/wps86.jpg">
+<p>下载：<a href="https://mirrors.tuna.tsinghua.edu.cn/jenkins/plugins/sonar/2.8.1/sonar.hpi" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/jenkins/plugins/sonar/2.8.1/sonar.hpi</a></p>
+<p>系统管理–》插件管理–》Advanced</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps87.jpg">
+<img src="/2019/05/25/SonarQube安装及使用/wps88.jpg">
+<img src="/2019/05/25/SonarQube安装及使用/wps89.jpg">
+<h3 id="配置sonar与scanner"><a href="#配置sonar与scanner" class="headerlink" title="配置sonar与scanner"></a>配置sonar与scanner</h3><p>系统管理–》全局工具配置</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps90.jpg">
+<p>系统管理–》系统设置</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps91.jpg">
+<p>项目配置有两种方式</p>
+<p>方式一：采用Jenkins的SonarQube Scanner插件</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps92.jpg">
+<img src="/2019/05/25/SonarQube安装及使用/wps93.jpg">
+<img src="/2019/05/25/SonarQube安装及使用/wps94.jpg">
+<p>点击SonarQube链接后跳转到SonarQube主页面</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps95.jpg">
+<p>方式二：采用maven插件</p>
+<p>在jenkins对应的maven中配置setting.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">在&lt;pluginGroups&gt;节点中添加： </span><br><span class="line">&lt;pluginGroup&gt;org.sonarsource.scanner.maven&lt;/pluginGroup&gt;</span><br><span class="line"></span><br><span class="line">在&lt;profiles&gt;节点中添加：  </span><br><span class="line">       &lt;profile&gt;</span><br><span class="line">            &lt;id&gt;sonar&lt;/id&gt;</span><br><span class="line">            &lt;activation&gt;</span><br><span class="line">                &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">            &lt;/activation&gt;</span><br><span class="line">            &lt;properties&gt;</span><br><span class="line">                &lt;sonar.host.url&gt;</span><br><span class="line">                http://sonarQube所在的服务器IP地址:9000</span><br><span class="line">                &lt;/sonar.host.url&gt;</span><br><span class="line">            &lt;/properties&gt;</span><br><span class="line">        &lt;/profile&gt;</span><br></pre></td></tr></table></figure>
+<p>在被分析的Mavne项目的pom.xml文件中添加如下内容：</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps96.jpg">
+<p>在jenkins构建配置界面中加上clean install sonar:sonar即可</p>
+<img src="/2019/05/25/SonarQube安装及使用/wps97.png">
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p><a href="https://blog.csdn.net/lswnew/article/details/79193529" target="_blank" rel="noopener">https://blog.csdn.net/lswnew/article/details/79193529</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jenkins/" rel="tag"># Jenkins</a>
+          
+            <a href="/tags/SonarQube/" rel="tag"># SonarQube</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/25/Jenkins部署及操作使用/" rel="next" title="Jenkins部署及操作使用">
+                <i class="fa fa-chevron-left"></i> Jenkins部署及操作使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="徐旭豪">
+            
+              <p class="site-author-name" itemprop="name">徐旭豪</p>
+              <div class="site-description motion-element" itemprop="description">戒骄戒躁</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ruiluxu" title="GitHub &rarr; https://github.com/ruiluxu" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/u/6498414646" title="Weibo &rarr; https://weibo.com/u/6498414646" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SonarQube是什么"><span class="nav-number">1.</span> <span class="nav-text">SonarQube是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SonarQube安装及配置"><span class="nav-number">2.</span> <span class="nav-text">SonarQube安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载及安装"><span class="nav-number">2.1.</span> <span class="nav-text">下载及安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改sonar配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">修改sonar配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置数据存储"><span class="nav-number">2.3.</span> <span class="nav-text">配置数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sonar启动"><span class="nav-number">2.4.</span> <span class="nav-text">Sonar启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问SonarQube"><span class="nav-number">2.5.</span> <span class="nav-text">访问SonarQube</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汉化sonarQube"><span class="nav-number">2.6.</span> <span class="nav-text">汉化sonarQube</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SonarQube-Scanner安装及配置"><span class="nav-number">3.</span> <span class="nav-text">SonarQube-Scanner安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载及安装-1"><span class="nav-number">3.1.</span> <span class="nav-text">下载及安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改sonar-scanner配置文件"><span class="nav-number">3.2.</span> <span class="nav-text">修改sonar-scanner配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行sonar-scanner"><span class="nav-number">3.3.</span> <span class="nav-text">运行sonar-scanner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看sonarqube指标信息"><span class="nav-number">3.4.</span> <span class="nav-text">查看sonarqube指标信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sonar与Jenkins进行集成"><span class="nav-number">4.</span> <span class="nav-text">Sonar与Jenkins进行集成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载sonar插件并安装"><span class="nav-number">4.1.</span> <span class="nav-text">下载sonar插件并安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置sonar与scanner"><span class="nav-number">4.2.</span> <span class="nav-text">配置sonar与scanner</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献："><span class="nav-number">5.</span> <span class="nav-text">参考文献：</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐旭豪</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+  <script src="/js/js.cookie.js?v=7.1.1"></script>
+  <script src="/js/scroll-cookie.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'RqBxgyTXjaiNfk3iXAxHtogk-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'RqBxgyTXjaiNfk3iXAxHtogk-gzGzoHsz',
+                'X-LC-Key': '5sbigksXXCgy04FviusdJF1w',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
